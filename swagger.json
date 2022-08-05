@@ -39,7 +39,7 @@
                     },
                     "password": {
                             "type": "string",
-                            "example": "12345abcde",
+                            "example": "password",
                             "description": "Password of a user assigned to a company"
                     }
                 }
@@ -54,11 +54,37 @@
                           "type": "object",
                           "properties":
                           {
-                            "msg":
+                            "token_type":
                             {
                               "type": "string",
                               "format": "uuid",
-                              "example": "Login successful",
+                              "example": "Bearer",
+                              "description": ""
+                            },
+                            "access_token":
+                            {
+                              "type": "string",
+                              "format": "uuid",
+                              "example": "eyJhbGciOiJSUzUxMiIsInR5cC",
+                              "description": ""
+                            },
+                            "expires_in":
+                            {
+                              "type": "number",
+                              "example": "3600",
+                              "description": ""
+                            },
+                            "expires_on":
+                            {
+                              "type": "number",
+                              "example": "1479664807",
+                              "description": ""
+                            },
+                            "refresh_token":
+                            {
+                              "type": "string",
+                              "format": "uuid",
+                              "example": "ScW2tnhl4Oi7ksHLj/TI",
                               "description": ""
                             }
                           }
@@ -79,25 +105,165 @@
                      } 
             }
           },
-    "/logout": {
-        "post": {
+          "/session": {
+            "post": {
+              "tags": [
+                "Authentication"
+              ],
+              "summary": "Initiates a session",
+              "produces": "application/json",
+              "parameters": [
+                {
+                  "name": "accessToken",
+                  "in": "body",
+                  "description": "User access token",
+                  "schema": {
+                      "type": "object",
+                      "properties": {
+                          "access_token": {
+                                  "type": "string",
+                                  "example": "eyJhbGciOiJSUzUxMiIsInR5cC",
+                                  "description": "Access token generated from logging in"
+                          }
+                      }
+                  }
+              }
+              ],
+                           "responses": {
+                             "200": {
+                               "description": "created session",
+                               "schema":
+                               {
+                                "type": "object",
+                                "properties":
+                                {
+                                  "session_ID":
+                                  {
+                                    "type": "string",
+                                    "format": "uuid",
+                                    "example": "1200",
+                                    "description": ""
+                                  }
+                                }
+                               }
+                             },
+                             "400":
+                             {
+                               "description": "invalid input, object invalid, or bad request"
+                             },
+                             "401":
+                             {
+                               "description": "no authorization token was found or provided token is incorrect"
+                             },
+                             "500":
+                             {
+                               "description": "application error"
+                             }
+                           } 
+                  }
+                },
+                "/login/refreshToken": {
+                  "post": {
+                    "tags": [
+                      "Authentication"
+                    ],
+                    "summary": "Refreshes the access token",
+                    "produces": "application/json",
+                    "parameters": [
+                      {
+                        "name": "refreshToken",
+                        "in": "body",
+                        "description": "User refresh token",
+                        "schema": {
+                          "type": "object",
+                          "properties": 
+                          {
+                            "type": "string",
+                            "example": "ScW2tnhl4Oi7ksHLj/TI",
+                            "description": "Refresh token generated from logging in"
+                        }
+                        }
+                    }
+                    ],
+                                 "responses": {
+                                   "200": {
+                                     "description": "Token refreshed",
+                                     "schema":
+                                     {
+                                      "type": "object",
+                                      "properties":
+                                      {
+                                      "token_type":
+                                      {
+                                        "type": "string",
+                                        "format": "uuid",
+                                        "example": "Bearer",
+                                        "description": ""
+                                      },
+                                      "access_token":
+                                      {
+                                        "type": "string",
+                                        "format": "uuid",
+                                        "example": "eyJhbGciOiJSUzUxMiIsInR5cC",
+                                        "description": ""
+                                      },
+                                      "expires_in":
+                                      {
+                                        "type": "number",
+                                        "example": "3600",
+                                        "description": ""
+                                      },
+                                      "expires_on":
+                                      {
+                                        "type": "number",
+                                        "example": "1479664807",
+                                        "description": ""
+                                      },
+                                      "refresh_token":
+                                      {
+                                        "type": "string",
+                                        "format": "uuid",
+                                        "example": "ScW2tnhl4Oi7ksHLj/TI",
+                                        "description": ""
+                                      }
+                                     }
+                                   },
+                                   "400":
+                                   {
+                                     "description": "invalid input, object invalid, or bad request"
+                                   },
+                                   "401":
+                                   {
+                                     "description": "no authorization token was found or provided token is incorrect"
+                                   },
+                                   "500":
+                                   {
+                                     "description": "application error"
+                                   }
+                                 } 
+                        }
+                      }
+                      },
+                    
+    "/login/logout": {
+        "delete": {
             "tags": [
                 "Authentication"
             ],
-            "summary": "Logs a user out of the system",
+            "summary": "Logs a user out of the system by revoking their token",
             "produces": "application/json",
             "parameters": [
                 {
-                "name": "",
-                "in": "body",
-                "description": "some parameter",
+                "name": "refreshToken",
+                "in": "query",
+                "description": "User refresh token",
                 "schema": {
                     "type": "object",
                     "properties": {
-                        "some property": {
+                        "refreshToken": {
                             "type": "string",
-                            "example": "",
-                            "description": "Something"
+                            "example": "ScW2tnhl4Oi7ksHLj",
+                            "description": ""
                           }
                       }
                   }
@@ -229,6 +395,7 @@
                   "type": "object",
                   "properties":
                     {
+                      "products": {
                     "type": "array",
                     "items":
                         {
@@ -280,6 +447,7 @@
                               "description": "User ID of last modified user"
                           }
                         }
+                        }
                       }
                     }
                   },
@@ -324,6 +492,7 @@
                 "type": "object",
                 "properties":
                 {
+                  "product": {
                   "type": "array",
                   "items":
                   {
@@ -375,6 +544,7 @@
                     }
                   }
                 }
+                }
               }
             },
             "400":
@@ -394,4 +564,4 @@
       }
 }
   }
-}
+  }
