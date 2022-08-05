@@ -1,3 +1,5 @@
+// Local server used to see endpoints
+
 const express = require('express');
 const app = express();
 const jwt = require("express-jwt");
