@@ -178,10 +178,12 @@
                           "type": "object",
                           "properties": 
                           {
+                            "refresh_token": {
                             "type": "string",
                             "example": "ScW2tnhl4Oi7ksHLj/TI",
                             "description": "Refresh token generated from logging in"
                         }
+                      }
                         }
                     }
                     ],
