@@ -1,0 +1,397 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0", 
+    "title": "Swagger Test",
+    "description": ""
+  },
+  "host": "localhost:8000",
+  "basePath": "/",
+  "tags": [
+    {
+      "name": "Authentication",
+      "description": "API for authenticating users in the system"
+    }
+  ],
+  "schemes": ["http"],
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
+  "paths": {
+    "/login": {
+      "post": {
+        "tags": [
+          "Authentication"
+        ],
+        "summary": "Logs a user into the system",
+        "produces": "application/json",
+        "parameters": [
+          {
+            "name": "credentials",
+            "in": "body",
+            "description": "Login credentials",
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "email": {
+                            "type": "string",
+                            "example": "gordon.gekko@gekco.com",
+                            "description": "Email of a user assigned to a company"
+                    },
+                    "password": {
+                            "type": "string",
+                            "example": "12345abcde",
+                            "description": "Password of a user assigned to a company"
+                    }
+                }
+            }
+        }
+        ],
+                     "responses": {
+                       "200": {
+                         "description": "login successful",
+                         "schema":
+                         {
+                          "type": "object",
+                          "properties":
+                          {
+                            "msg":
+                            {
+                              "type": "string",
+                              "format": "uuid",
+                              "example": "Login successful",
+                              "description": ""
+                            }
+                          }
+                         }
+                       },
+                       "400":
+                       {
+                         "description": "invalid input, object invalid, or bad request"
+                       },
+                       "401":
+                       {
+                         "description": "no authorization token was found or provided token is incorrect"
+                       },
+                       "500":
+                       {
+                         "description": "application error"
+                       }
+                     } 
+            }
+          },
+    "/logout": {
+        "post": {
+            "tags": [
+                "Authentication"
+            ],
+            "summary": "Logs a user out of the system",
+            "produces": "application/json",
+            "parameters": [
+                {
+                "name": "",
+                "in": "body",
+                "description": "some parameter",
+                "schema": {
+                    "type": "object",
+                    "properties": {
+                        "some property": {
+                            "type": "string",
+                            "example": "",
+                            "description": "Something"
+                          }
+                      }
+                  }
+              }
+              ],
+                           "responses": {
+                             "200": {
+                               "description": "logout successful",
+                               "schema":
+                               {
+                                "type": "object",
+                                "properties":
+                                {
+                                  "msg":
+                                  {
+                                    "type": "string",
+                                    "format": "uuid",
+                                    "example": "Logout successful",
+                                    "description": ""
+                                  }
+                                }
+                               }
+                             },
+                             "400":
+                             {
+                               "description": "invalid input, object invalid, or bad request"
+                             },
+                             "401":
+                             {
+                               "description": "no authorization token was found or provided token is incorrect"
+                             },
+                             "500":
+                             {
+                               "description": "application error"
+                             }
+                           } 
+                  }
+                },
+      "/user": {
+        "post": {
+          "tags": [
+              "User"
+            ],
+          "summary": "Creates a user in the Pippin Portal",
+          "description": "Creates a user within the Pippin Portal under an existing company",
+          "operationId": "createUser",
+          "produces": "application/json",
+          "parameters": [
+              {
+                "name": "User information",
+                "in": "body",
+                "description": "",
+                "schema": {
+                    "type": "object",
+                    "properties": {
+                      "firstName":
+                      {
+                        "type": "string",
+                        "example": "Gordon",
+                        "description": "First name of a user assigned to a company"
+                      },    
+                      "lastName":
+                      {
+                        "type": "string",
+                        "example": "Gecko",
+                        "description": "Last name of a user assigned to a company"
+                      },                             
+                      "email": {
+                        "type": "string",
+                        "example": "gordon.gekko@gekco.com",
+                        "description": "Email of a user assigned to a company. Must be uniquw"
+                      },
+                      "password": {
+                        "type": "string",
+                        "example": "12345abcde",
+                        "description": "Password of a user assigned to a company"
+                      }
+                    }
+                  }
+                }
+              ],
+              "responses": {
+                "200": {
+                  "description": "user created",
+                  "schema":
+                  {
+                    "type": "object",
+                    "properties":
+                    {
+                      "userId":
+                      {
+                        "type": "string",
+                        "format": "uuid",
+                        "example": "3cf6d8d7-03e0-4b55-afe9-273c207ad8e4",
+                        "description": "id of the user created"
+                      }
+                    }
+                  }
+                },
+                "400":
+                {
+                  "description": "invalid input, object invalid, or bad request"
+                },
+                "401":
+                {
+                  "description": "no authorization token was found or provided token is incorrect"
+                },
+                "500":
+                {
+                  "description": "application error"
+                }
+              } 
+            }
+          },
+        "/product": {
+          "get": {
+            "tags": [
+                "Product"
+              ],
+            "summary": "Get a list of all available Pippin products",
+            "description": "Retrieve an array of objects for all currently active Pippin products",
+            "operationId": "getProducts",
+            "produces": "application/json",
+            "responses": {
+              "200": {
+                "description": "list of Products",
+                "schema":
+                 {
+                  "type": "object",
+                  "properties":
+                    {
+                    "type": "array",
+                    "items":
+                        {
+                          "type": "object",
+                          "properties": {
+                            "Product_ID": {
+                              "type": "number",
+                              "example": 1248,
+                              "description": "ID attribute of the Pippin product"
+                            },
+                            "Product_Name": {
+                              "type": "string",
+                              "example": "Assignment Verification Search",
+                              "description": "Name attribute of the Pippin product"
+                            },
+                            "Product_Description": {
+                              "type": "string",
+                              "example": "Assignment Verification Search",
+                              "description": "Description attribute of the Pippin product"
+                            },
+                            "Category_ID": {
+                              "type": "number",
+                              "example": 1,
+                              "description": "Category of product"
+                            },
+                            "Product_Status": {
+                              "type": "number",
+                              "example": 1,
+                              "description": "Is the Product Active?"
+                            },
+                            "Product_Default_Flag": {
+                              "type": "number",                                
+                              "example": 1,
+                              "description": "Is it a default Product?"
+                            },
+                            "Product_Creation_Date": {
+                              "type": "string",
+                              "example": "2020-04-30T14:09:51.000Z",
+                              "description": "Creation date"
+                            },
+                            "Product_Modification_Date": {
+                              "type": "string",
+                              "example": "2020-04-30T14:09:51.000Z",
+                              "description": "Last Modified Date"
+                            },
+                            "Product_Modified_By": {
+                              "type": "string",
+                              "example": "550b7a72-269e-448e-ac66-09faf539d513",
+                              "description": "User ID of last modified user"
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "400":
+                  {
+                    "description": "invalid input, object invalid, or bad request"
+                  },
+                  "401":
+                  {
+                    "description": "no authorization token was found or provided token is incorrect"
+                  },
+                  "500":
+                  {
+                    "description": "application error"
+                  }
+                } 
+              }
+            }
+  },
+  "/product/{company_ID}": {
+    "get": {
+      "tags": [
+          "Product"
+        ],
+      "summary": "Get a list of a specific company's available products",
+      "description": "Retrieve an array of objects for a company's active products",
+      "operationId": "getFilteredProducts",
+      "produces": "application/json",
+      "parameters": [
+        {
+          "name": "company_ID",
+          "in": "path",
+          "description": "ID of the company",
+          "type": "string"
+        }
+      ],
+          "responses": {
+            "200": {
+              "description": "list of Products",
+              "schema":
+              {
+                "type": "object",
+                "properties":
+                {
+                  "type": "array",
+                  "items":
+                  {
+                    "type": "object",
+                    "properties": {
+                      "Product_ID": {
+                        "type": "number",
+                        "example": 1248,
+                        "description": "ID attribute of the Pippin product"
+                      },
+                      "Product_Name": {
+                        "type": "string",
+                        "example": "Assignment Verification Search",
+                        "description": "Name attribute of the Pippin product"
+                      },
+                      "Product_Description": {
+                        "type": "string",
+                        "example": "Assignment Verification Search",
+                        "description": "Description attribute of the Pippin product"
+                      },
+                      "Category_ID": {
+                        "type": "number",
+                        "example": 1,
+                        "description": "Category of product"
+                      },
+                      "Product_Status": {
+                        "type": "number",
+                        "example": 1,
+                        "description": "Is the Product Active?"
+                      },
+                      "Product_Default_Flag": {
+                        "type": "number",                                "example": 1,
+                        "description": "Is it a default Product?"
+                      },
+                      "Product_Creation_Date": {
+                        "type": "string",
+                        "example": "2020-04-30T14:09:51.000Z",
+                        "description": "Creation date"
+                      },
+                      "Product_Modification_Date": {
+                        "type": "string",
+                        "example": "2020-04-30T14:09:51.000Z",
+                        "description": "Last Modified Date"
+                      },
+                      "Product_Modified_By": {
+                        "type": "string",
+                        "example": "550b7a72-269e-448e-ac66-09faf539d513",
+                        "description": "User ID of last modified user"
+                    }
+                  }
+                }
+              }
+            },
+            "400":
+            {
+              "description": "invalid input, object invalid, or bad request"
+            },
+            "401":
+            {
+              "description": "no authorization token was found or provided token is incorrect"
+            },
+            "500":
+            {
+              "description": "application error"
+            }
+          } 
+        }
+      }
+}
+  }
+}
