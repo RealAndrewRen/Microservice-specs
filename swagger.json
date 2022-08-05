@@ -526,7 +526,8 @@
                         "description": "Is the Product Active?"
                       },
                       "Product_Default_Flag": {
-                        "type": "number",                                "example": 1,
+                        "type": "number",        
+                        "example": 1,
                         "description": "Is it a default Product?"
                       },
                       "Product_Creation_Date": {
