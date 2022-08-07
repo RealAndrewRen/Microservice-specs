@@ -2,8 +2,8 @@
   "swagger": "2.0",
   "info": {
     "version": "1.0.0", 
-    "title": "Swagger Test",
-    "description": ""
+    "title": "Specs For New API Endpoints",
+    "description": "PT-3470"
   },
   "host": "localhost:8000",
   "basePath": "/",
@@ -16,6 +16,14 @@
   "schemes": ["http"],
   "consumes": ["application/json"],
   "produces": ["application/json"],
+  "securityDefinitions": {
+    "bearer": {
+      "type": "apiKey",
+      "name": "Authorization",
+      "in": "header",
+      "description": "\n\nPlease enter a valid bearer token value for the authorization header"
+    }
+  },
   "paths": {
     "/login": {
       "post": {
@@ -162,7 +170,7 @@
                            } 
                   }
                 },
-                "/login/refreshToken": {
+                "/login/refresh": {
                   "post": {
                     "tags": [
                       "Authentication"
@@ -247,7 +255,7 @@
                       }
                       },
                     
-    "/login/logout": {
+    "/login/refresh{refreshToken}": {
         "delete": {
             "tags": [
                 "Authentication"
@@ -257,7 +265,7 @@
             "parameters": [
                 {
                 "name": "refreshToken",
-                "in": "query",
+                "in": "path",
                 "description": "User refresh token",
                 "schema": {
                     "type": "object",
