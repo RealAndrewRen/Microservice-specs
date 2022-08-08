@@ -255,7 +255,7 @@
                       }
                       },
                     
-    "/login/refresh{refreshToken}": {
+    "/login/{refreshToken}": {
         "delete": {
             "tags": [
                 "Authentication"
