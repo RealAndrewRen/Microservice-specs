@@ -108,7 +108,7 @@
                             },
                             "company": {
                               "type": "string",
-                              "example": "GekCo",
+                              "example": "GekkoCo",
                               "description": "Company of the user"
                             }
                           }
@@ -306,7 +306,7 @@
                       },                             
                       "company": {
                         "type": "string",
-                        "example": "GekCo",
+                        "example": "GekkoCo",
                         "description": "Company of the user"
                       }
                         }
