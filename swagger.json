@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "1.0.0", 
+    "version": "1.0.0",
     "title": "Specs For New API Endpoints",
     "description": "PT-3470"
   },
@@ -13,9 +13,15 @@
       "description": "API for authenticating users in the system"
     }
   ],
-  "schemes": ["http"],
-  "consumes": ["application/json"],
-  "produces": ["application/json"],
+  "schemes": [
+    "http"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
   "securityDefinitions": {
     "bearer": {
       "type": "apiKey",
@@ -38,604 +44,474 @@
             "in": "body",
             "description": "Login credentials",
             "schema": {
-                "type": "object",
-                "properties": {
-                    "email": {
-                            "type": "string",
-                            "example": "gordon.gekko@gekco.com",
-                            "description": "Email of a user assigned to a company"
-                    },
-                    "password": {
-                            "type": "string",
-                            "example": "password",
-                            "description": "Password of a user assigned to a company"
-                    }
+              "type": "object",
+              "properties": {
+                "email": {
+                  "type": "string",
+                  "example": "gordon.gekko@gekco.com",
+                  "description": "Email of a user assigned to a company"
+                },
+                "password": {
+                  "type": "string",
+                  "example": "password",
+                  "description": "Password of a user assigned to a company"
                 }
-            }
-        }
-        ],
-                     "responses": {
-                       "200": {
-                         "description": "login successful",
-                         "schema":
-                         {
-                          "type": "object",
-                          "properties":
-                          {
-                            "token_type":
-                            {
-                              "type": "string",
-                              "format": "uuid",
-                              "example": "Bearer",
-                              "description": ""
-                            },
-                            "access_token":
-                            {
-                              "type": "string",
-                              "format": "uuid",
-                              "example": "eyJhbGciOiJSUzUxMiIsInR5cC",
-                              "description": ""
-                            },
-                            "expires_in":
-                            {
-                              "type": "number",
-                              "example": "3600",
-                              "description": ""
-                            },
-                            "expires_on":
-                            {
-                              "type": "number",
-                              "example": "1479664807",
-                              "description": ""
-                            },
-                            "firstName":
-                            {
-                              "type": "string",
-                              "example": "Gordon",
-                              "description": "First name of a user assigned to a company"
-                            },
-                            "lastName":
-                            {
-                              "type": "string",
-                              "example": "Gecko",
-                              "description": "Last name of a user assigned to a company"
-                            },
-                            "email":
-                            {
-                              "type": "string",
-                              "example": "gordon.gekko@gekco.com",
-                              "description": "Email of a user assigned to a company"
-                            },
-                            "company": {
-                              "type": "string",
-                              "example": "GekkoCo",
-                              "description": "Company of the user"
-                            }
-                          }
-                         }
-                       },
-                       "400":
-                       {
-                         "description": "invalid input, object invalid, or bad request"
-                       },
-                       "401":
-                       {
-                         "description": "no authorization token was found or provided token is incorrect"
-                       },
-                       "500":
-                       {
-                         "description": "application error"
-                       }
-                     } 
-            }
-          },
-    "/logout": {
-        "get": {
-            "tags": [
-                "Authentication"
-            ],
-            "summary": "Logs a user out of the system by revoking their access token",
-            "produces": "application/json",
-                           "responses": {
-                             "200": {
-                               "description": "logout successful",
-                               "schema":
-                               {
-                                "type": "object",
-                                "properties":
-                                {
-                                  "msg":
-                                  {
-                                    "type": "string",
-                                    "format": "uuid",
-                                    "example": "Logout successful",
-                                    "description": ""
-                                  }
-                                }
-                               }
-                             },
-                             "400":
-                             {
-                               "description": "invalid input, object invalid, or bad request"
-                             },
-                             "401":
-                             {
-                               "description": "no authorization token was found or provided token is incorrect"
-                             },
-                             "500":
-                             {
-                               "description": "application error"
-                             }
-                           } 
-                  }
-                },
-                "/order/searchReport/{order_id}": {
-                  "get": {
-                      "tags": [
-                          "Order"
-                      ],
-                      "summary": "Get search report identifier",
-                      "description": "",
-                      "operationId": "getSearchReportIdentifier",
-                      "produces": "application/json",
-              "parameters": [
-                  {
-                    "name": "order-id",
-                    "in": "path",
-                    "description": "",
-                    "required": true,
-                    "schema": {
-                        "type": "string",
-                        "format": "uuid",
-                        "example": "fe015056-d611-40ab-be75-86d40b636acd-49b8c070-50aa-47b5-bcc9-839786d2a32c-0"
-                      }
-                    }
-                  ],
-                                     "responses": {
-                                       "200": {
-                                         "description": "",
-                                         "schema":
-                                         {
-                                          "type": "object",
-                                          "properties":
-                                          {
-                                            "search_report_identifier":
-                                            {
-                                              "type": "string",
-                                              "format": "uuid",
-                                              "example": "abcde12345",
-                                              "description": ""
-                                            }
-                                          }
-                                         }
-                                       },
-                                       "400":
-                                       {
-                                         "description": "invalid input, object invalid, or bad request"
-                                       },
-                                       "401":
-                                       {
-                                         "description": "no authorization token was found or provided token is incorrect"
-                                       },
-                                       "500":
-                                       {
-                                         "description": "application error"
-                                       }
-                                     } 
-                            }
-                          },
-                          "/order/searchReport/{search_report_identifier}": {
-                            "get": {
-                                "tags": [
-                                    "Order"
-                                ],
-                                "summary": "Download search report",
-                                "description": "",
-                                "operationId": "getSearchReport",
-                                "produces": "application/json",
-                        "parameters": [
-                            {
-                              "name": "search_report_identifier",
-                              "in": "path",
-                              "description": "",
-                              "required": true,
-                              "schema": {
-                                  "type": "string",
-                                  "example": "abcde12345"
-                                }
-                              }
-                            ],
-                                               "responses": {
-                                                 "200": {
-                                                   "description": "Download link",
-                                                   "schema":
-                                                   {
-                                                    "type": "object",
-                                                    "properties":
-                                                    {
-                                                      "Link":
-                                                      {
-                                                        "type": "string",
-                                                        "example": "http://www.africau.edu/images/default/sample.pdf",
-                                                        "description": ""
-                                                      }
-                                                    }
-                                                   }
-                                                 },
-                                                 "400":
-                                                 {
-                                                   "description": "invalid input, object invalid, or bad request"
-                                                 },
-                                                 "401":
-                                                 {
-                                                   "description": "no authorization token was found or provided token is incorrect"
-                                                 },
-                                                 "500":
-                                                 {
-                                                   "description": "application error"
-                                                 }
-                                               } 
-                                      }
-                                    },
-                "/user": {
-                  "post": {
-                    "tags": [
-                        "User"
-                      ],
-                    "summary": "Creates a user in the Pippin Portal",
-                    "description": "Creates a user within the Pippin Portal under an existing company",
-                    "operationId": "createUser",
-                    "produces": "application/json",
-                    "parameters": [
-                        {
-                          "name": "User information",
-                          "in": "body",
-                          "description": "",
-                          "schema": {
-                              "type": "object",
-                              "properties": {
-                                "firstName":
-                                {
-                                  "type": "string",
-                                  "example": "Gordon",
-                                  "description": "First name of a user assigned to a company"
-                                },    
-                                "lastName":
-                                {
-                                  "type": "string",
-                                  "example": "Gecko",
-                                  "description": "Last name of a user assigned to a company"
-                                },                             
-                                "email": {
-                                  "type": "string",
-                                  "example": "gordon.gekko@gekco.com",
-                                  "description": "Email of a user assigned to a company. Must be unique"
-                                },
-                                "address":
-                                {
-                                  "type": "string",
-                                  "example": "1234 NW Bobcat Lane, St. Robert, MO",
-                                  "description": "Address of a user assigned to a company"
-                                },                             
-                                "phone": {
-                                  "type": "string",
-                                  "example": "212-456-7890",
-                                  "description": "Phone number of a user assigned to a company. Must be unique"
-                                },
-                                "fax":
-                                {
-                                  "type": "string",
-                                  "example": "555-123-4567",
-                                  "description": "Fax number of a user assigned to a company"
-                                }
-                              }
-                            }
-                          }
-                        ],
-                        "responses": {
-                          "200": {
-                            "description": "user created",
-                            "schema":
-                            {
-                              "type": "object",
-                              "properties":
-                              {
-                                "userId":
-                                {
-                                  "type": "string",
-                                  "format": "uuid",
-                                  "example": "3cf6d8d7-03e0-4b55-afe9-273c207ad8e4",
-                                  "description": "id of the user created"
-                                }
-                              }
-                            }
-                          },
-                          "400":
-                          {
-                            "description": "invalid input, object invalid, or bad request"
-                          },
-                          "401":
-                          {
-                            "description": "no authorization token was found or provided token is incorrect"
-                          },
-                          "500":
-                          {
-                            "description": "application error"
-                          }
-                        } 
-                      }
-                    },
-          "/user/{user-id}": {
-            "get": {
-              "tags": [
-                  "User"
-                ],
-              "summary": "Get user info from the Pippin Portal",
-              "description": "Retrieve currently stored user information",
-              "operationId": "getUserInfo",
-              "produces": "application/json",
-              "parameters": [
-                  {
-                    "name": "user-id",
-                    "in": "path",
-                    "description": "",
-                    "required": true,
-                    "schema": {
-                        "type": "string",
-                        "format": "uuid",
-                        "example": "3cf6d8d7-03e0-4b55-afe9-273c207ad8e4"
-                      }
-                    }
-                  ],
-                  "responses": {
-                    "200": {
-                      "description": "user info",
-                      "schema":
-                      {
-                        "type": "object",
-                        "properties":
-                        {
-                          "firstName":
-                          {
-                            "type": "string",
-                            "example": "Gordon",
-                            "description": "First name of a user assigned to a company"
-                          },
-                          "lastName":
-                          {
-                        "type": "string",
-                        "example": "Gecko",
-                        "description": "Last name of a user assigned to a company"
-                      },                             
-                      "email": {
-                        "type": "string",
-                        "example": "gordon.gekko@gekco.com",
-                        "description": "Email of a user assigned to a company. Must be unique"
-                      },
-                      "address":
-                      {
-                        "type": "string",
-                        "example": "1234 NW Bobcat Lane, St. Robert, MO",
-                        "description": "Address of a user assigned to a company"
-                      },                             
-                      "phone": {
-                        "type": "string",
-                        "example": "212-456-7890",
-                        "description": "Phone number of a user assigned to a company. Must be unique"
-                      },
-                      "fax":
-                      {
-                        "type": "string",
-                        "example": "555-123-4567",
-                        "description": "Fax number of a user assigned to a company"
-                      },                             
-                      "company": {
-                        "type": "string",
-                        "example": "GekkoCo",
-                        "description": "Company of the user"
-                      }
-                        }
-                      }
-                    },
-                    "400":
-                    {
-                      "description": "invalid input, object invalid, or bad request"
-                    },
-                    "401":
-                    {
-                      "description": "no authorization token was found or provided token is incorrect"
-                    },
-                    "500":
-                    {
-                      "description": "application error"
-                    }
-                  } 
-                },
-                  "patch": {
-                    "tags": [
-                        "User"
-                      ],
-                    "summary": "Updates a user in the Pippin Portal",
-                    "description": "Update stored user information in the Pippin Portal",
-                    "operationId": "patchUser",
-                    "produces": "application/json",
-                    "parameters": [
-                      {
-                        "name": "user-id",
-                        "in": "path",
-                        "required": true,
-                        "schema": {
-                          "type": "string",
-                          "format": "uuid",
-                          "example": "3cf6d8d7-03e0-4b55-afe9-273c207ad8e4"
-                        } 
-                      },
-                        {
-                          "name": "User information",
-                          "in": "body",
-                          "description": "",
-                          "schema": {
-                              "type": "object",
-                              "properties": {
-                                "firstName":
-                                {
-                                  "type": "string",
-                                  "example": "Gordon",
-                                  "description": "First name of a user assigned to a company"
-                                },    
-                                "lastName":
-                                {
-                                  "type": "string",
-                                  "example": "Gecko",
-                                  "description": "Last name of a user assigned to a company"
-                                },                             
-                                "email": {
-                                  "type": "string",
-                                  "example": "gordon.gekko@gekco.com",
-                                  "description": "Email of a user assigned to a company. Must be unique"
-                                },
-                                "address":
-                                {
-                                  "type": "string",
-                                  "example": "1234 NW Bobcat Lane, St. Robert, MO",
-                                  "description": "Address of a user assigned to a company"
-                                },                             
-                                "phone": {
-                                  "type": "string",
-                                  "example": "212-456-7890",
-                                  "description": "Phone number of a user assigned to a company. Must be unique"
-                                },
-                                "fax":
-                                {
-                                  "type": "string",
-                                  "example": "555-123-4567",
-                                  "description": "Fax number of a user assigned to a company"
-                                }
-                              }
-                            }
-                          }
-                        ],
-                        "responses": {
-                          "200": {
-                            "description": "user updated",
-                            "schema":
-                            {
-                              "type": "object",
-                              "properties":
-                              {
-                                "msg":
-                                {
-                                  "type": "string",
-                                  "example": "user updated",
-                                  "description": ""
-                                }
-                              }
-                            }
-                          },
-                          "400":
-                          {
-                            "description": "invalid input, object invalid, or bad request"
-                          },
-                          "401":
-                          {
-                            "description": "no authorization token was found or provided token is incorrect"
-                          },
-                          "500":
-                          {
-                            "description": "application error"
-                          }
-                        } 
-                      }
-                    },
-        "/product": {
-          "get": {
-            "tags": [
-                "Product"
-              ],
-            "summary": "Get a list of all available Pippin products",
-            "description": "Retrieve an array of objects for all currently active Pippin products",
-            "operationId": "getProducts",
-            "produces": "application/json",
-            "responses": {
-              "200": {
-                "description": "list of Products",
-                "schema":
-                 {
-                  "type": "object",
-                  "properties":
-                    {
-                    "products": {
-                    "type": "array",
-                    "items":
-                        {
-                          "type": "object",
-                          "properties": {
-                            "Product_ID": {
-                              "type": "number",
-                              "example": 1248,
-                              "description": "ID attribute of the Pippin product"
-                            },
-                            "Product_Name": {
-                              "type": "string",
-                              "example": "Assignment Verification Search",
-                              "description": "Name attribute of the Pippin product"
-                            },
-                            "Product_Description": {
-                              "type": "string",
-                              "example": "Assignment Verification Search",
-                              "description": "Description attribute of the Pippin product"
-                            }
-                        }
-                        }
-                      }
-                    }
-                  },
-                  "400":
-                  {
-                    "description": "invalid input, object invalid, or bad request"
-                  },
-                  "401":
-                  {
-                    "description": "no authorization token was found or provided token is incorrect"
-                  },
-                  "500":
-                  {
-                    "description": "application error"
-                  }
-                } 
               }
             }
-  },
-  "/product/{company_ID}": {
-    "get": {
-      "tags": [
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "login successful",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "token_type": {
+                  "type": "string",
+                  "format": "uuid",
+                  "example": "Bearer",
+                  "description": ""
+                },
+                "access_token": {
+                  "type": "string",
+                  "format": "uuid",
+                  "example": "eyJhbGciOiJSUzUxMiIsInR5cC",
+                  "description": ""
+                },
+                "expires_in": {
+                  "type": "number",
+                  "example": "3600",
+                  "description": ""
+                },
+                "expires_on": {
+                  "type": "number",
+                  "example": "1479664807",
+                  "description": ""
+                },
+                "firstName": {
+                  "type": "string",
+                  "example": "Gordon",
+                  "description": "First name of a user assigned to a company"
+                },
+                "lastName": {
+                  "type": "string",
+                  "example": "Gecko",
+                  "description": "Last name of a user assigned to a company"
+                },
+                "email": {
+                  "type": "string",
+                  "example": "gordon.gekko@gekco.com",
+                  "description": "Email of a user assigned to a company"
+                },
+                "company": {
+                  "type": "string",
+                  "example": "GekkoCo",
+                  "description": "Company of the user"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "invalid input, object invalid, or bad request"
+          },
+          "401": {
+            "description": "no authorization token was found or provided token is incorrect"
+          },
+          "500": {
+            "description": "application error"
+          }
+        }
+      }
+    },
+    "/logout": {
+      "get": {
+        "tags": [
+          "Authentication"
+        ],
+        "summary": "Logs a user out of the system by revoking their access token",
+        "produces": "application/json",
+        "responses": {
+          "200": {
+            "description": "logout successful",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "msg": {
+                  "type": "string",
+                  "format": "uuid",
+                  "example": "Logout successful",
+                  "description": ""
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "invalid input, object invalid, or bad request"
+          },
+          "401": {
+            "description": "no authorization token was found or provided token is incorrect"
+          },
+          "500": {
+            "description": "application error"
+          }
+        }
+      }
+    },
+    "/order/searchReport/{order_id}": {
+      "get": {
+        "tags": [
+          "Order"
+        ],
+        "summary": "Get search report identifier",
+        "description": "",
+        "operationId": "getSearchReportIdentifier",
+        "produces": "application/json",
+        "parameters": [
+          {
+            "name": "order-id",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "example": "fe015056-d611-40ab-be75-86d40b636acd-49b8c070-50aa-47b5-bcc9-839786d2a32c-0"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "search_report_identifier": {
+                  "type": "string",
+                  "format": "uuid",
+                  "example": "abcde12345",
+                  "description": ""
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "invalid input, object invalid, or bad request"
+          },
+          "401": {
+            "description": "no authorization token was found or provided token is incorrect"
+          },
+          "500": {
+            "description": "application error"
+          }
+        }
+      }
+    },
+    "/order/searchReport/{search_report_identifier}": {
+      "get": {
+        "tags": [
+          "Order"
+        ],
+        "summary": "Download search report",
+        "description": "",
+        "operationId": "getSearchReport",
+        "produces": "application/json",
+        "parameters": [
+          {
+            "name": "search_report_identifier",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "abcde12345"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Download link",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "Link": {
+                  "type": "string",
+                  "example": "http://www.africau.edu/images/default/sample.pdf",
+                  "description": ""
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "invalid input, object invalid, or bad request"
+          },
+          "401": {
+            "description": "no authorization token was found or provided token is incorrect"
+          },
+          "500": {
+            "description": "application error"
+          }
+        }
+      }
+    },
+    "/user": {
+      "post": {
+        "tags": [
+          "User"
+        ],
+        "summary": "Creates a user in the Pippin Portal",
+        "description": "Creates a user within the Pippin Portal under an existing company",
+        "operationId": "createUser",
+        "produces": "application/json",
+        "parameters": [
+          {
+            "name": "User information",
+            "in": "body",
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "firstName": {
+                  "type": "string",
+                  "example": "Gordon",
+                  "description": "First name of a user assigned to a company"
+                },
+                "lastName": {
+                  "type": "string",
+                  "example": "Gecko",
+                  "description": "Last name of a user assigned to a company"
+                },
+                "email": {
+                  "type": "string",
+                  "example": "gordon.gekko@gekco.com",
+                  "description": "Email of a user assigned to a company. Must be unique"
+                },
+                "address": {
+                  "type": "string",
+                  "example": "1234 NW Bobcat Lane, St. Robert, MO",
+                  "description": "Address of a user assigned to a company"
+                },
+                "phone": {
+                  "type": "string",
+                  "example": "212-456-7890",
+                  "description": "Phone number of a user assigned to a company. Must be unique"
+                },
+                "fax": {
+                  "type": "string",
+                  "example": "555-123-4567",
+                  "description": "Fax number of a user assigned to a company"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "user created",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "userId": {
+                  "type": "string",
+                  "format": "uuid",
+                  "example": "3cf6d8d7-03e0-4b55-afe9-273c207ad8e4",
+                  "description": "id of the user created"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "invalid input, object invalid, or bad request"
+          },
+          "401": {
+            "description": "no authorization token was found or provided token is incorrect"
+          },
+          "500": {
+            "description": "application error"
+          }
+        }
+      }
+    },
+    "/user/{user-id}": {
+      "get": {
+        "tags": [
+          "User"
+        ],
+        "summary": "Get user info from the Pippin Portal",
+        "description": "Retrieve currently stored user information",
+        "operationId": "getUserInfo",
+        "produces": "application/json",
+        "parameters": [
+          {
+            "name": "user-id",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "example": "3cf6d8d7-03e0-4b55-afe9-273c207ad8e4"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "user info",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "firstName": {
+                  "type": "string",
+                  "example": "Gordon",
+                  "description": "First name of a user assigned to a company"
+                },
+                "lastName": {
+                  "type": "string",
+                  "example": "Gecko",
+                  "description": "Last name of a user assigned to a company"
+                },
+                "email": {
+                  "type": "string",
+                  "example": "gordon.gekko@gekco.com",
+                  "description": "Email of a user assigned to a company. Must be unique"
+                },
+                "address": {
+                  "type": "string",
+                  "example": "1234 NW Bobcat Lane, St. Robert, MO",
+                  "description": "Address of a user assigned to a company"
+                },
+                "phone": {
+                  "type": "string",
+                  "example": "212-456-7890",
+                  "description": "Phone number of a user assigned to a company. Must be unique"
+                },
+                "fax": {
+                  "type": "string",
+                  "example": "555-123-4567",
+                  "description": "Fax number of a user assigned to a company"
+                },
+                "company": {
+                  "type": "string",
+                  "example": "GekkoCo",
+                  "description": "Company of the user"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "invalid input, object invalid, or bad request"
+          },
+          "401": {
+            "description": "no authorization token was found or provided token is incorrect"
+          },
+          "500": {
+            "description": "application error"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "User"
+        ],
+        "summary": "Updates a user in the Pippin Portal",
+        "description": "Update stored user information in the Pippin Portal",
+        "operationId": "patchUser",
+        "produces": "application/json",
+        "parameters": [
+          {
+            "name": "user-id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "example": "3cf6d8d7-03e0-4b55-afe9-273c207ad8e4"
+            }
+          },
+          {
+            "name": "User information",
+            "in": "body",
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "firstName": {
+                  "type": "string",
+                  "example": "Gordon",
+                  "description": "First name of a user assigned to a company"
+                },
+                "lastName": {
+                  "type": "string",
+                  "example": "Gecko",
+                  "description": "Last name of a user assigned to a company"
+                },
+                "email": {
+                  "type": "string",
+                  "example": "gordon.gekko@gekco.com",
+                  "description": "Email of a user assigned to a company. Must be unique"
+                },
+                "address": {
+                  "type": "string",
+                  "example": "1234 NW Bobcat Lane, St. Robert, MO",
+                  "description": "Address of a user assigned to a company"
+                },
+                "phone": {
+                  "type": "string",
+                  "example": "212-456-7890",
+                  "description": "Phone number of a user assigned to a company. Must be unique"
+                },
+                "fax": {
+                  "type": "string",
+                  "example": "555-123-4567",
+                  "description": "Fax number of a user assigned to a company"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "user updated",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "msg": {
+                  "type": "string",
+                  "example": "user updated",
+                  "description": ""
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "invalid input, object invalid, or bad request"
+          },
+          "401": {
+            "description": "no authorization token was found or provided token is incorrect"
+          },
+          "500": {
+            "description": "application error"
+          }
+        }
+      }
+    },
+    "/product": {
+      "get": {
+        "tags": [
           "Product"
         ],
-      "summary": "Get a list of a specific company's available products",
-      "description": "Retrieve an array of objects for a company's active products",
-      "operationId": "getFilteredProducts",
-      "produces": "application/json",
-      "parameters": [
-        {
-          "name": "company_ID",
-          "in": "path",
-          "required": true,
-          "description": "ID of the company",
-          "type": "string"
-        }
-      ],
-          "responses": {
-            "200": {
-              "description": "list of Products",
-              "schema":
-              {
-                "type": "object",
-                "properties":
-                {
-                  "product": {
+        "summary": "Get a list of all available Pippin products",
+        "description": "Retrieve an array of objects for all currently active Pippin products",
+        "operationId": "getProducts",
+        "produces": "application/json",
+        "responses": {
+          "200": {
+            "description": "list of Products",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "products": {
                   "type": "array",
-                  "items":
-                  {
+                  "items": {
                     "type": "object",
                     "properties": {
                       "Product_ID": {
@@ -653,27 +529,85 @@
                         "example": "Assignment Verification Search",
                         "description": "Description attribute of the Pippin product"
                       }
+                    }
                   }
-                }
                 }
               }
             },
-            "400":
-            {
+            "400": {
               "description": "invalid input, object invalid, or bad request"
             },
-            "401":
-            {
+            "401": {
               "description": "no authorization token was found or provided token is incorrect"
             },
-            "500":
-            {
+            "500": {
               "description": "application error"
             }
-          } 
+          }
         }
       }
+    },
+    "/product/{company_ID}": {
+      "get": {
+        "tags": [
+          "Product"
+        ],
+        "summary": "Get a list of a specific company's available products",
+        "description": "Retrieve an array of objects for a company's active products",
+        "operationId": "getFilteredProducts",
+        "produces": "application/json",
+        "parameters": [
+          {
+            "name": "company_ID",
+            "in": "path",
+            "required": true,
+            "description": "ID of the company",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "list of Products",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "product": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "Product_ID": {
+                        "type": "number",
+                        "example": 1248,
+                        "description": "ID attribute of the Pippin product"
+                      },
+                      "Product_Name": {
+                        "type": "string",
+                        "example": "Assignment Verification Search",
+                        "description": "Name attribute of the Pippin product"
+                      },
+                      "Product_Description": {
+                        "type": "string",
+                        "example": "Assignment Verification Search",
+                        "description": "Description attribute of the Pippin product"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "invalid input, object invalid, or bad request"
+            },
+            "401": {
+              "description": "no authorization token was found or provided token is incorrect"
+            },
+            "500": {
+              "description": "application error"
+            }
+          }
+        }
+      }
+    }
+  }
 }
-  }
-  }
-  
