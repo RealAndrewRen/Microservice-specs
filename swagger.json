@@ -169,6 +169,114 @@
                            } 
                   }
                 },
+                "/order/searchReport/{order_id}": {
+                  "get": {
+                      "tags": [
+                          "Order"
+                      ],
+                      "summary": "Get search report identifier",
+                      "description": "",
+                      "operationId": "getSearchReportIdentifier",
+                      "produces": "application/json",
+              "parameters": [
+                  {
+                    "name": "order-id",
+                    "in": "path",
+                    "description": "",
+                    "required": true,
+                    "schema": {
+                        "type": "string",
+                        "format": "uuid",
+                        "example": "fe015056-d611-40ab-be75-86d40b636acd-49b8c070-50aa-47b5-bcc9-839786d2a32c-0"
+                      }
+                    }
+                  ],
+                                     "responses": {
+                                       "200": {
+                                         "description": "",
+                                         "schema":
+                                         {
+                                          "type": "object",
+                                          "properties":
+                                          {
+                                            "search_report_identifier":
+                                            {
+                                              "type": "string",
+                                              "format": "uuid",
+                                              "example": "abcde12345",
+                                              "description": ""
+                                            }
+                                          }
+                                         }
+                                       },
+                                       "400":
+                                       {
+                                         "description": "invalid input, object invalid, or bad request"
+                                       },
+                                       "401":
+                                       {
+                                         "description": "no authorization token was found or provided token is incorrect"
+                                       },
+                                       "500":
+                                       {
+                                         "description": "application error"
+                                       }
+                                     } 
+                            }
+                          },
+                          "/order/searchReport/{search_report_identifier}": {
+                            "get": {
+                                "tags": [
+                                    "Order"
+                                ],
+                                "summary": "Download search report",
+                                "description": "",
+                                "operationId": "getSearchReport",
+                                "produces": "application/json",
+                        "parameters": [
+                            {
+                              "name": "search_report_identifier",
+                              "in": "path",
+                              "description": "",
+                              "required": true,
+                              "schema": {
+                                  "type": "string",
+                                  "example": "abcde12345"
+                                }
+                              }
+                            ],
+                                               "responses": {
+                                                 "200": {
+                                                   "description": "Download link",
+                                                   "schema":
+                                                   {
+                                                    "type": "object",
+                                                    "properties":
+                                                    {
+                                                      "Link":
+                                                      {
+                                                        "type": "string",
+                                                        "example": "http://www.africau.edu/images/default/sample.pdf",
+                                                        "description": ""
+                                                      }
+                                                    }
+                                                   }
+                                                 },
+                                                 "400":
+                                                 {
+                                                   "description": "invalid input, object invalid, or bad request"
+                                                 },
+                                                 "401":
+                                                 {
+                                                   "description": "no authorization token was found or provided token is incorrect"
+                                                 },
+                                                 "500":
+                                                 {
+                                                   "description": "application error"
+                                                 }
+                                               } 
+                                      }
+                                    },
                 "/user": {
                   "post": {
                     "tags": [
@@ -438,8 +546,7 @@
                           }
                         } 
                       }
-                    }
-              },
+                    },
         "/product": {
           "get": {
             "tags": [
@@ -457,7 +564,7 @@
                   "type": "object",
                   "properties":
                     {
-                      "products": {
+                    "products": {
                     "type": "array",
                     "items":
                         {
@@ -567,5 +674,6 @@
         }
       }
 }
+  }
   }
   
