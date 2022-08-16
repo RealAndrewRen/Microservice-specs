@@ -157,7 +157,7 @@
         }
       }
     },
-    "/order/searchReport/{order_id}": {
+    "/order/search-report/{order_id}": {
       "get": {
         "tags": [
           "Order"
@@ -206,7 +206,7 @@
         }
       }
     },
-    "/order/searchReport/{search_report_identifier}": {
+    "/order/search-report/{search_report_identifier}": {
       "get": {
         "tags": [
           "Order"
