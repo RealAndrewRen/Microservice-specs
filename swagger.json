@@ -48,6 +48,7 @@
               "properties": {
                 "email": {
                   "type": "string",
+                  "format": "password",
                   "example": "gordon.gekko@gekco.com",
                   "description": "Email of a user assigned to a company"
                 },
